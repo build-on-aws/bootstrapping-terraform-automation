@@ -1,11 +1,6 @@
-## My Project
+## Bootstrapping Terraform Automation
 
-TODO: Fill this README out!
-
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
+Sample code repo showing how to bootstrap Terraform using Amazon CodeCatalyst, and using workflows to set up a CI/CD pipeline. It forms the base of the tutorial [Bootstrapping your Terraform automation with Amazon CodeCatalyst]().
 
 ## Security
 

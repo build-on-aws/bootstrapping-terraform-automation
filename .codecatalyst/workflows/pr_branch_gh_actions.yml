@@ -1,0 +1,36 @@
+Name: TerraformPRBranch
+SchemaVersion: "1.0"
+
+Triggers:
+  - Type: PULLREQUEST
+    Events:
+      - OPEN
+      - REVISION
+
+Actions:
+  Terraform-PR-Branch-Plan:
+    Identifier: aws/github-actions-runner@v1
+    Inputs:
+      Sources:
+        - WorkflowSource
+    Environment:
+      Connections:
+        - Role: PR-Branch-Infrastructure
+          Name: "123456789012"
+      Name: TerraformBootstrap
+    Configuration:
+      Steps:
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+          with:
+            terraform_version: 1.3.7
+        - name: Terraform Format
+          run: terraform fmt -check -no-color
+        - name: Terraform Init
+          run: terraform init -no-color
+        - name: Terraform Validate
+          run: terraform validate -no-color
+        - name: Terraform Plan
+          run: terraform plan -no-color -input=false
+    Compute:
+      Type: EC2
